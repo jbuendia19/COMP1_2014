@@ -79,6 +79,7 @@ def DisplayMenu():
 
 def GetMenuChoice():
   Choice = input()
+  Choice = Choice.lower()
   print()
   return Choice
 
@@ -196,7 +197,7 @@ def PlayGame(Deck, RecentScores):
   while (NoOfCardsTurnedOver < 52) and (not GameOver):
     GetCard(NextCard, Deck, NoOfCardsTurnedOver)
     Choice = ''
-    while (Choice != ('y','yes')) and (Choice != ('n','no')):
+    while (Choice != 'y') and (Choice != 'n'):
       Choice = GetChoiceFromUser()
     DisplayCard(NextCard)
     NoOfCardsTurnedOver = NoOfCardsTurnedOver + 1
