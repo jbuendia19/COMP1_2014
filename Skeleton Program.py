@@ -130,9 +130,17 @@ def IsNextCardHigher(LastCard, NextCard):
   return Higher
 
 def GetPlayerName():
+  valid = False
   print()
   PlayerName = input('Please enter your name: ')
   print()
+  while not valid:
+    if PlayerName == '':
+      PlayerName = input('Please enter a valid name: ')
+      print()
+      valid = False
+    else:
+      valid = True
   return PlayerName
 
 def GetChoiceFromUser():
