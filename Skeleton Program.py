@@ -79,7 +79,8 @@ def DisplayMenu():
 
 def GetMenuChoice():
   Choice = input()
-  print()
+  if Choice in ['Q','quit','Quit']:
+    Choice = 'q'
   return Choice
 
 def LoadDeck(Deck):
@@ -129,14 +130,25 @@ def IsNextCardHigher(LastCard, NextCard):
   return Higher
 
 def GetPlayerName():
+  valid = False
   print()
   PlayerName = input('Please enter your name: ')
   print()
+  while not valid:
+    if PlayerName == '':
+      PlayerName = input('Please enter a valid name: ')
+      print()
+      valid = False
+    else:
+      valid = True
   return PlayerName
 
 def GetChoiceFromUser():
   Choice = input('Do you think the next card will be higher than the last card (enter y or n)? ')
-  Choice = Choice.lower()
+  if Choice in ['y','yes','Y','Yes']:
+    Choice = 'y'
+  elif Choice in ['n','no','N','No']:
+    Choice = 'n'
   return Choice
 
 def DisplayEndOfGameMessage(Score):
@@ -196,7 +208,7 @@ def PlayGame(Deck, RecentScores):
   while (NoOfCardsTurnedOver < 52) and (not GameOver):
     GetCard(NextCard, Deck, NoOfCardsTurnedOver)
     Choice = ''
-    while (Choice != ('y','yes')) and (Choice != ('n','no')):
+    while (Choice != 'y') and (Choice != 'n'):
       Choice = GetChoiceFromUser()
     DisplayCard(NextCard)
     NoOfCardsTurnedOver = NoOfCardsTurnedOver + 1
