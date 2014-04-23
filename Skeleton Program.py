@@ -170,8 +170,10 @@ def DisplayRecentScores(RecentScores):
   print()
   print('Recent Scores: ')
   print()
+  print('{0:<10} {1:<10}'.format('Name','Score'))
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
-    print(RecentScores[Count].Name, 'got a score of', RecentScores[Count].Score)
+    print('{0:<10} {1:<10}'.format(RecentScores[Count].Name,RecentScores[Count].Score))
+  print()
   print()
   print('Press the Enter key to return to the main menu')
   input()
@@ -179,26 +181,7 @@ def DisplayRecentScores(RecentScores):
 
 def UpdateRecentScores(RecentScores, Score):
   HighScore = input('Do you want to add your score to the high score table? (y or n): ')
-<<<<<<< HEAD
-  HighScore = HighScore.lower()
-  PlayerName = GetPlayerName()
-  FoundSpace = False
-  Count = 1
-  while (not FoundSpace) and (Count <= NO_OF_RECENT_SCORES):
-    if HighScore == 'y':
-      if RecentScores[Count].Name == '':
-        FoundSpace = True
-      else:
-        Count = Count + 1
-    if HighScore == 'n':
-      if not FoundSpace:
-        for Count in range(1, NO_OF_RECENT_SCORES):
-          RecentScores[Count].Name = RecentScores[Count + 1].Name
-          RecentScores[Count].Score = RecentScores[Count + 1].Score
-        Count = NO_OF_RECENT_SCORES
-      RecentScores[Count].Name = PlayerName
-      RecentScores[Count].Score = Score
-=======
+  print()
   if HighScore == 'y':
     PlayerName = GetPlayerName()
     FoundSpace = False
@@ -215,7 +198,6 @@ def UpdateRecentScores(RecentScores, Score):
        Count = NO_OF_RECENT_SCORES
     RecentScores[Count].Name = PlayerName
     RecentScores[Count].Score = Score
->>>>>>> fb85d064e42a62a1b20f6a6ad0c594630c03338f
 
 def PlayGame(Deck, RecentScores):
   LastCard = TCard()
