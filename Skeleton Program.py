@@ -179,21 +179,25 @@ def DisplayRecentScores(RecentScores):
   print()
 
 def UpdateRecentScores(RecentScores, Score):
+  HighScore = input('Do you want to add your score to the high score table? (y or n): ')
+  HighScore = HighScore.lower()
   PlayerName = GetPlayerName()
   FoundSpace = False
   Count = 1
   while (not FoundSpace) and (Count <= NO_OF_RECENT_SCORES):
-    if RecentScores[Count].Name == '':
-      FoundSpace = True
-    else:
-      Count = Count + 1
-  if not FoundSpace:
-    for Count in range(1, NO_OF_RECENT_SCORES):
-      RecentScores[Count].Name = RecentScores[Count + 1].Name
-      RecentScores[Count].Score = RecentScores[Count + 1].Score
-    Count = NO_OF_RECENT_SCORES
-  RecentScores[Count].Name = PlayerName
-  RecentScores[Count].Score = Score
+    if HighScore == 'y':
+      if RecentScores[Count].Name == '':
+        FoundSpace = True
+      else:
+        Count = Count + 1
+    if HighScore == 'n':
+      if not FoundSpace:
+        for Count in range(1, NO_OF_RECENT_SCORES):
+          RecentScores[Count].Name = RecentScores[Count + 1].Name
+          RecentScores[Count].Score = RecentScores[Count + 1].Score
+        Count = NO_OF_RECENT_SCORES
+      RecentScores[Count].Name = PlayerName
+      RecentScores[Count].Score = Score
 
 def PlayGame(Deck, RecentScores):
   LastCard = TCard()
