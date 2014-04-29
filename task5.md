@@ -15,16 +15,19 @@
    Follower - used to keep check of a previous value of a variable so the new value is compared
    Temporary - used for storing something for a very short period of time
 
-2. Fixed Variable - this is used to remember the number of array elements in use
-   Stepper - During iterations, a variable is used to keep a count of number of repetitions
-   Most Recent Holder - Storing the latest of a series of values input by the user to add to a running total
-   Most Wanted Holder - when searching through a set  of values for the largest value, the largest value is stored
-   Gatherer - Calculating the total of a series of values, keep a running total of all the values
-   Transformations - Storing the result of a conversion of a measurement in inches to a measurement in metres
-   Follower - Before updating a variable its current value is copied to the follower
-   Temporary - used as the intermediate storage when swapping values in variables
+2. Fixed Variable -  noOfSwaps (98)
+   Stepper - for count in range, NoOfSwapsMadeSoFar
+   Most Recent Holder - Choice (197), LineFromFile (87), LastCard(187)
+   Most Wanted Holder - NextCard (188)
+   Gatherer - 
+   Transformations - Higher (124), FoundSpace (171)
+   Follower - LastCard (187)
+   Temporary - SwapSpace (97)
    
 ## Additional Task - Functions and Parameters
 
 1. pass by value creates a copy of the original variable and when changes are made it will have no effect on the original variable and it is lost when the program execution returns to the code,
 and pass by reference is when the variable inside the routine uses a reference to the same memory location as the variable passed and any changes to the contents of the variable are accessible to the program code
+
+2. pass by value - Rank(53), Suit (65), Score(139)
+   pass by reference - Deck (83), ThisCard(109)

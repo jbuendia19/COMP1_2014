@@ -222,6 +222,19 @@ def DisplayCorrectGuessMessage(Score):
   print('Your score is now ', Score, '.', sep='')
   print()
 
+def BubbleSortScores(RecentScores):
+  scores = len(RecentScores)
+  swap_made = True
+  while swap_made:
+    swap_made = False
+    for count in range(scores-1):
+      if RecentScores[count] > RecentScores[count+1]:
+        temp = RecentScores[count+1]
+        RecentScores[count+1] = RecentScores[count]
+        RecentScores [count] = temp
+        swap_made = True
+    return RecentScores
+
 def ResetRecentScores(RecentScores):
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
     RecentScores[Count].Name = ''
@@ -229,6 +242,7 @@ def ResetRecentScores(RecentScores):
     RecentScores[Count].Date = ''
 
 def DisplayRecentScores(RecentScores):
+  BubbleSortScores(RecentScores)
   print()
   print('Recent Scores: ')
   print()
@@ -261,6 +275,20 @@ def UpdateRecentScores(RecentScores, Score):
     RecentScores[Count].Name = PlayerName
     RecentScores[Count].Score = Score
     RecentScores[Count].date = ('{0}/{1}/{2}'.format(date.day,date.month,date.year))
+
+def BubbleSortScores(RecentScores):
+  scores = len(RecentScores)
+  swap_made = True
+  while swap_made:
+    swap_made = False
+    for Count in range(1, scores-1):
+      if RecentScores[Count].Score < RecentScores[Count+1].Score:
+        temp = RecentScores[Count]
+        RecentScores[Count+1] = RecentScores[Count]
+        RecentScores[Count] = temp
+        swap_made = True
+  return RecentScores
+    
 
 def PlayGame(Deck, RecentScores):
   LastCard = TCard()
