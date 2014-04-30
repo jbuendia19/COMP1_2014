@@ -79,6 +79,7 @@ def DisplayMenu():
   print('3. Display recent scores')
   print('4. Reset recent scores')
   print('5. Option')
+  print('6. Save Scores')
   print()
   print('Select an option from the menu (or enter q to quit): ', end='')
 
@@ -152,6 +153,10 @@ def LoadDeck(Deck):
     if AceHighOrLow == True and Deck[Count].Rank == 1:
       Deck[Count].Rank = 14
     Count = Count + 1
+
+def SaveScores(RecentScores):
+  with open('save_scores.txt', mode='w', encoding='utf-8')as my_file:
+    
  
 def ShuffleDeck(Deck):
   SwapSpace = TCard()
