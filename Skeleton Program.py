@@ -155,13 +155,6 @@ def LoadDeck(Deck):
       Deck[Count].Rank = 14
     Count = Count + 1
 
-##def SaveScores(RecentScores):
-##  with open('save_scores.txt', mode='w', encoding='utf-8')as my_file:
-##    for count in range(len(RecentScores)):
-##      my_file.write(RecentScores[count].Name + '\n')
-##      my_file.write(RecentScores[count].Score + '\n')
-##      my_file.write(RecentScores[count].date + '\n')
-##
  
 def ShuffleDeck(Deck):
   SwapSpace = TCard()
@@ -294,6 +287,12 @@ def SaveScores(RecentScores):
       my_file.write(str(RecentScores[count].Score) + '\n')
       my_file.write(str(RecentScores[count].date) + '\n')
     print('Saved!!')
+
+def LoadScores():
+  with open('save_scores.txt', mode='r', encoding='utf-8')as my_file:
+    for line in my_file:
+      print(line)
+##    print(my_file)
     
 
 def PlayGame(Deck, RecentScores):
@@ -330,6 +329,7 @@ if __name__ == '__main__':
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
     RecentScores.append(TRecentScore())
   Choice = ''
+  LoadScores()
   while Choice != 'q':
     DisplayMenu()
     Choice = GetMenuChoice()
