@@ -8,6 +8,7 @@
 
 import random
 import datetime
+import pickle
 date = datetime.datetime.now()
 
 NO_OF_RECENT_SCORES = 3
@@ -154,9 +155,13 @@ def LoadDeck(Deck):
       Deck[Count].Rank = 14
     Count = Count + 1
 
-def SaveScores(RecentScores):
-  with open('save_scores.txt', mode='w', encoding='utf-8')as my_file:
-    
+##def SaveScores(RecentScores):
+##  with open('save_scores.txt', mode='w', encoding='utf-8')as my_file:
+##    for count in range(len(RecentScores)):
+##      my_file.write(RecentScores[count].Name + '\n')
+##      my_file.write(RecentScores[count].Score + '\n')
+##      my_file.write(RecentScores[count].date + '\n')
+##
  
 def ShuffleDeck(Deck):
   SwapSpace = TCard()
@@ -281,6 +286,14 @@ def BubbleSortScores(RecentScores):
         RecentScores[Count] = temp
         swap_made = True
   return RecentScores
+
+def SaveScores(RecentScores):
+  with open('save_scores.txt', mode='w', encoding='utf-8')as my_file:
+    for count in range(1,len(RecentScores)):
+      my_file.write((RecentScores[count].Name) + '\n')
+      my_file.write(str(RecentScores[count].Score) + '\n')
+      my_file.write(str(RecentScores[count].date) + '\n')
+    print('Saved!!')
     
 
 def PlayGame(Deck, RecentScores):
@@ -335,3 +348,5 @@ if __name__ == '__main__':
       DisplayOptions()
       OptionChoice = GetOptionChoice()
       SetOptions(OptionChoice)
+    elif Choice == '6':
+      SaveScores(RecentScores)
