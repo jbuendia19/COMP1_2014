@@ -10,7 +10,7 @@ import random
 import datetime
 date = datetime.datetime.now()
 
-NO_OF_RECENT_SCORES = 3
+NO_OF_RECENT_SCORES = 10
 
 class TCard():
   def __init__(self):
@@ -80,7 +80,6 @@ def DisplayMenu():
   print('4. Reset recent scores')
   print('5. Option')
   print('6. Save Scores')
-  print('7. Load Scores')
   print()
   print('Select an option from the menu (or enter q to quit): ', end='')
 
@@ -152,10 +151,6 @@ def LoadDeck(Deck):
     if AceHighOrLow == True and Deck[Count].Rank == 1:
       Deck[Count].Rank = 14
     Count = Count + 1
-<<<<<<< HEAD
-=======
-
->>>>>>> 973ebc8a6ce8b27094e7244b1689930b0c506c81
  
 def ShuffleDeck(Deck):
   SwapSpace = TCard()
@@ -287,18 +282,27 @@ def SaveScores(RecentScores):
       my_file.write((RecentScores[count].Name) + '\n')
       my_file.write(str(RecentScores[count].Score) + '\n')
       my_file.write(str(RecentScores[count].date) + '\n')
+      print()
     print('Saved!!')
 
 def LoadScores():
+  loaded = False
   RecentScores = ['']
   with open('save_scores.txt', mode = 'r', encoding = 'utf-8')as my_file:
-    for count in range(1, NO_OF_RECENT_SCORES + 1):
-      scores = TRecentScore()
-      scores.Name = my_file.readline().rstrip('\n')
-      scores.Score = my_file.readline().rstrip('\n')
-      scores.date = my_file.readline().rstrip('\n')
-      RecentScores.append(scores)
-    return RecentScores
+    while not loaded:
+      try:
+        for count in range(1, NO_OF_RECENT_SCORES + 1):
+          scores = TRecentScore()
+          scores.Name = my_file.readline().rstrip('\n')
+          scores.Score = my_file.readline().rstrip('\n')
+          scores.date = my_file.readline().rstrip('\n')
+          RecentScores.append(scores)
+          loaded = True
+      except IOError:
+        print('File Not Found!')
+        loaded = False
+  print('File loaded Successfully!')
+  return RecentScores
     
 def PlayGame(Deck, RecentScores):
   LastCard = TCard()
@@ -334,7 +338,7 @@ if __name__ == '__main__':
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
     RecentScores.append(TRecentScore())
   Choice = ''
-  LoadScores()
+  RecentScores = LoadScores()
   while Choice != 'q':
     DisplayMenu()
     Choice = GetMenuChoice()
@@ -355,5 +359,4 @@ if __name__ == '__main__':
       SetOptions(OptionChoice)
     elif Choice == '6':
       SaveScores(RecentScores)
-    elif Choice == '7':
-      RecentScores = LoadScores()
+          
