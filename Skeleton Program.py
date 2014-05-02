@@ -329,6 +329,7 @@ def PlayGame(Deck, RecentScores):
     UpdateRecentScores(RecentScores, 51)
 
 if __name__ == '__main__':
+  found = False
   for Count in range(1, 53):
     Deck.append(TCard())
   for Count in range(1, NO_OF_RECENT_SCORES + 1):
@@ -356,4 +357,11 @@ if __name__ == '__main__':
     elif Choice == '6':
       SaveScores(RecentScores)
     elif Choice == '7':
-      RecentScores = LoadScores()
+      while not found:
+        try:
+          RecentScores = LoadScores()
+          found = True
+        except IOError:
+          found = False
+          print('File not found')
+          
