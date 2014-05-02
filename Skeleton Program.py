@@ -8,7 +8,6 @@
 
 import random
 import datetime
-import pickle
 date = datetime.datetime.now()
 
 NO_OF_RECENT_SCORES = 3
@@ -81,6 +80,7 @@ def DisplayMenu():
   print('4. Reset recent scores')
   print('5. Option')
   print('6. Save Scores')
+  print('7. Load Scores')
   print()
   print('Select an option from the menu (or enter q to quit): ', end='')
 
@@ -130,8 +130,6 @@ def SetAceHighOrLow():
   elif AceHighOrLow == 'l':
     AceHighOrLow = False
   
-  
-
 
 def GetMenuChoice():
   Choice = input()
@@ -154,7 +152,10 @@ def LoadDeck(Deck):
     if AceHighOrLow == True and Deck[Count].Rank == 1:
       Deck[Count].Rank = 14
     Count = Count + 1
+<<<<<<< HEAD
+=======
 
+>>>>>>> 973ebc8a6ce8b27094e7244b1689930b0c506c81
  
 def ShuffleDeck(Deck):
   SwapSpace = TCard()
@@ -289,12 +290,16 @@ def SaveScores(RecentScores):
     print('Saved!!')
 
 def LoadScores():
-  with open('save_scores.txt', mode='r', encoding='utf-8')as my_file:
-    for line in my_file:
-      print(line)
-##    print(my_file)
+  RecentScores = ['']
+  with open('save_scores.txt', mode = 'r', encoding = 'utf-8')as my_file:
+    for count in range(1, NO_OF_RECENT_SCORES + 1):
+      scores = TRecentScore()
+      scores.Name = my_file.readline().rstrip('\n')
+      scores.Score = my_file.readline().rstrip('\n')
+      scores.date = my_file.readline().rstrip('\n')
+      RecentScores.append(scores)
+    return RecentScores
     
-
 def PlayGame(Deck, RecentScores):
   LastCard = TCard()
   NextCard = TCard()
@@ -350,3 +355,5 @@ if __name__ == '__main__':
       SetOptions(OptionChoice)
     elif Choice == '6':
       SaveScores(RecentScores)
+    elif Choice == '7':
+      RecentScores = LoadScores()
