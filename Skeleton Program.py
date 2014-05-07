@@ -27,6 +27,7 @@ Deck = [None]
 RecentScores = [None]
 Choice = ''
 AceHighOrLow = False
+SameScore = True
 
 def GetRank(RankNo):
   Rank = ''
@@ -87,6 +88,7 @@ def DisplayOptions():
   print('Option Menu')
   print()
   print('1. Set Ace to be High or Low')
+  print('2. Card of same score ends game')
   print()
 
 def GetOptionChoice():
@@ -96,6 +98,8 @@ def GetOptionChoice():
   print()
   while not valid:
     if OptionChoice == '1' or OptionChoice =='q':
+      valid = True
+    elif OptionChoice == '2':
       valid = True
     else:
       print('Invalid Choice!')
@@ -107,6 +111,8 @@ def GetOptionChoice():
 def SetOptions(OptionChoice):
   if OptionChoice == '1':
     SetAceHighOrLow()
+  elif OptionChoice == '2':
+    SetSameScore()
 
 
 def SetAceHighOrLow():
@@ -128,7 +134,22 @@ def SetAceHighOrLow():
     AceHighOrLow = True
   elif AceHighOrLow == 'l':
     AceHighOrLow = False
-  
+
+def SetSameScore():
+  global SameScore
+  valid = False
+  SameScore = input('Do you want cards with the same value as previuos card to end (y or n): ').lower()
+  while not valid:
+    if SameScore == 'y' or SameScore == 'n':
+      valid = True
+    else:
+      print('Invalid Choice!')
+      SameScore = input('Enter a valid choice: ')
+      valid = False
+  if SameScore == 'n':
+    SameScore = True
+  elif SameScore == 'y':
+    SameScore = False
 
 def GetMenuChoice():
   Choice = input()
@@ -184,6 +205,7 @@ def IsNextCardHigher(LastCard, NextCard):
   if NextCard.Rank > LastCard.Rank:
     Higher = True
   return Higher
+    
 
 def GetPlayerName():
   valid = False
@@ -301,7 +323,7 @@ def LoadScores():
       except IOError:
         print('File Not Found!')
         loaded = False
-  print('File loaded Successfully!')
+  print('Recent Scores loaded Successfully!')
   return RecentScores
     
 def PlayGame(Deck, RecentScores):
@@ -324,7 +346,7 @@ def PlayGame(Deck, RecentScores):
       LastCard.Rank = NextCard.Rank
       LastCard.Suit = NextCard.Suit
     else:
-      GameOver = True
+      GameOver = True   
   if GameOver:
     DisplayEndOfGameMessage(NoOfCardsTurnedOver - 2)
     UpdateRecentScores(RecentScores, NoOfCardsTurnedOver - 2)
@@ -360,15 +382,4 @@ if __name__ == '__main__':
       SetOptions(OptionChoice)
     elif Choice == '6':
       SaveScores(RecentScores)
-<<<<<<< HEAD
-=======
-    elif Choice == '7':
-      while not found:
-        try:
-          RecentScores = LoadScores()
-          found = True
-        except IOError:
-          found = False
-          print('File not found')
->>>>>>> d2e3f47a1eb7ab7149d90ed3812b734e02f8f6f7
           
