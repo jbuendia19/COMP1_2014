@@ -10,7 +10,7 @@ import random
 import datetime
 date = datetime.datetime.now()
 
-NO_OF_RECENT_SCORES = 10
+NO_OF_RECENT_SCORES = 11
 
 class TCard():
   def __init__(self):
@@ -27,7 +27,7 @@ Deck = [None]
 RecentScores = [None]
 Choice = ''
 AceHighOrLow = False
-SameScore = True
+SameScore = False
 
 def GetRank(RankNo):
   Rank = ''
@@ -146,9 +146,9 @@ def SetSameScore():
       print('Invalid Choice!')
       SameScore = input('Enter a valid choice: ')
       valid = False
-  if SameScore == 'n':
+  if SameScore == 'y':
     SameScore = True
-  elif SameScore == 'y':
+  elif SameScore == 'n':
     SameScore = False
 
 def GetMenuChoice():
@@ -327,6 +327,7 @@ def LoadScores():
   return RecentScores
     
 def PlayGame(Deck, RecentScores):
+  global SameScore
   LastCard = TCard()
   NextCard = TCard()
   GameOver = False
@@ -340,6 +341,11 @@ def PlayGame(Deck, RecentScores):
       Choice = GetChoiceFromUser()
     DisplayCard(NextCard)
     NoOfCardsTurnedOver = NoOfCardsTurnedOver + 1
+    if SameScore == True and NextCard.Rank == LastCard.Rank:
+      GameOver = True
+    if SameScore == False and NextCard.Rank == LastCard.Rank:
+      GameOver = False
+      NoOfCardsTurnedOver = NoOfCardsTurnedOver + 1
     Higher = IsNextCardHigher(LastCard, NextCard)
     if (Higher and Choice == 'y') or (not Higher and Choice == 'n'):
       DisplayCorrectGuessMessage(NoOfCardsTurnedOver - 1)
