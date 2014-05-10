@@ -343,16 +343,15 @@ def PlayGame(Deck, RecentScores):
     NoOfCardsTurnedOver = NoOfCardsTurnedOver + 1
     if SameScore == True and NextCard.Rank == LastCard.Rank:
       GameOver = True
-    if SameScore == False and NextCard.Rank == LastCard.Rank:
-      GameOver = False
-      NoOfCardsTurnedOver = NoOfCardsTurnedOver + 1
+##    if SameScore == False and NextCard.Rank == LastCard.Rank:
+##      GameOver = False
     Higher = IsNextCardHigher(LastCard, NextCard)
     if (Higher and Choice == 'y') or (not Higher and Choice == 'n'):
       DisplayCorrectGuessMessage(NoOfCardsTurnedOver - 1)
       LastCard.Rank = NextCard.Rank
       LastCard.Suit = NextCard.Suit
     else:
-      GameOver = True   
+      GameOver = True      
   if GameOver:
     DisplayEndOfGameMessage(NoOfCardsTurnedOver - 2)
     UpdateRecentScores(RecentScores, NoOfCardsTurnedOver - 2)
